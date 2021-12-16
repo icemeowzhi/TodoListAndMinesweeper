@@ -30,7 +30,7 @@ function renderTodoItemList(todoItems) {
             itemDiv.classList.add("important");
         }
 
-        importanceEl.addEventListener("click", (e) => {
+        importanceEl.addEventListener("click", () => {
             console.log("click: ", item);
             if (item.isImportance) {
                 item.isImportance = false;
@@ -50,7 +50,7 @@ function renderTodoItemList(todoItems) {
             finishCount++;
         }
 
-        inputEl.addEventListener("change", (e) => {
+        inputEl.addEventListener("change", () => {
             /*
             finishedItems.push(item);
             todoItems.splice(i, 1);
@@ -65,7 +65,7 @@ function renderTodoItemList(todoItems) {
         let deleteBtn = document.createElement("button");
         deleteBtn.className = "delBtn"
         deleteBtn.innerText = "X";
-        deleteBtn.addEventListener("click",(e)=>{
+        deleteBtn.addEventListener("click",()=>{
             todoItems.splice(i,1)
             todoItems.sort(compareTodoItem)
             renderTodoItemList(todoItems)
@@ -119,13 +119,9 @@ function renderFinishedItemList(todoItems) {
             itemDiv.classList.add("important");
         }
 
-        importanceEl.addEventListener("click", (e) => {
+        importanceEl.addEventListener("click", () => {
             console.log("click: ", item);
-            if (item.isImportance) {
-                item.isImportance = false;
-            } else {
-                item.isImportance = true;
-            }
+            item.isImportance = !item.isImportance;
             todoItems.sort(compareTodoItem)
             renderFinishedItemList(todoItems);
         });
@@ -153,7 +149,7 @@ function renderInputPane(todoItems) {
     let saveBtnEl = inputPaneEl.querySelector("#save-btn")
     let loadBtnEl = inputPaneEl.querySelector("#load-btn")
 
-    addBtnEl.addEventListener("click", (e)=>{
+    addBtnEl.addEventListener("click", ()=>{
         let inputEl = inputPaneEl.querySelector("input");
 
         todoItems.push({
@@ -171,7 +167,7 @@ function renderInputPane(todoItems) {
         renderTodoItemList(todoItems);
     });
 
-    hisBtnEl.addEventListener("click", (e)=>{
+    hisBtnEl.addEventListener("click", ()=>{
         if (hisBtnEl.classList.contains("open")) {
             hisBtnEl.classList.remove("open");
             renderTodoItemList(todoItems)
@@ -198,7 +194,7 @@ function renderInputPane(todoItems) {
         input.type = "file";
         input.accept = ".json";
         input.multiple = false;
-        input.addEventListener("change",(e)=>{
+        input.addEventListener("change",()=>{
             let file = input.files[0];
             file.text().then(
                 result => {
