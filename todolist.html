@@ -1,11 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="css/general.css">
-    <title>TODO List</title>
+    <link rel="stylesheet" type="text/css" href="css/todolist.css">
+    <title>My Todo-list.</title>
+    <meta charset="UTF-8">
 </head>
+
 <body>
-<p class="holder"><a href="index.html">返回主页</a></p>
+<div class="content-area">
+
+    <div id="todolist" class="holder todolist-panel">
+
+        <div id = "todolist-content">
+
+            <div id = "title">My Todo-list:</div>
+
+            <div class="input-pane">
+                <input id = "todo-input" type="text" >
+                <button id = "add-btn" class="controlBtn">+</button>
+                <button id = "his-btn" class="controlBtn">H</button>
+            </div>
+
+            <hr>
+
+            <div class="list-pane"></div></div>
+
+    </div>
+
+    <div class="holder"><a href="index.html">返回主页</a></div>
+
+</div>
+<script src="script/todolist/todolist.js"></script>
 </body>
 </html>
