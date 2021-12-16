@@ -1,6 +1,3 @@
-
-
-
 let todoItems = [];
 
 let finishedItems = [];
@@ -9,6 +6,8 @@ function renderTodoItemList(todoItems) {
 
     let paneEl = document.querySelector("#todolist-content > .list-pane");
     paneEl.innerHTML = "";
+
+    let finishCount = 0;
 
     for (let i=0; i < todoItems.length; i++ ) {
         let item = todoItems[i];
@@ -48,6 +47,7 @@ function renderTodoItemList(todoItems) {
         if (item.isFinished){
             itemDiv.classList.add("finished");
             inputEl.checked = true;
+            finishCount++;
         }
 
         inputEl.addEventListener("change", (e) => {
@@ -81,6 +81,11 @@ function renderTodoItemList(todoItems) {
         paneEl.append(itemDiv);
     }
 
+    let todoCount = document.createElement("div")
+    todoCount.className = "todo-count"
+    todoCount.innerText = `共有${todoItems.length}个项目，${finishCount}项已完成，${todoItems.length-finishCount}项未完成。`
+
+    paneEl.append(todoCount);
 }
 
 function renderFinishedItemList(todoItems) {
@@ -118,13 +123,10 @@ function renderFinishedItemList(todoItems) {
             console.log("click: ", item);
             if (item.isImportance) {
                 item.isImportance = false;
-                todoItems.sort(compareTodoItem)
-
             } else {
                 item.isImportance = true;
-                todoItems.sort(compareTodoItem)
             }
-
+            todoItems.sort(compareTodoItem)
             renderFinishedItemList(todoItems);
         });
 
@@ -172,22 +174,19 @@ function renderInputPane(todoItems) {
             renderTodoItemList(todoItems)
         } else {
             hisBtnEl.classList.add("open");
-            renderFinishedItemList(todoItems, finishedItems)
+            renderFinishedItemList(todoItems)
         }
     });
 
-    // let btnEl = document.querySelector("#todolist #add-btn");
 }
 
 function compareTodoItem(a,b){
-    if (a.title ?? a.isFinished ?? a.isImportance ?? b.title ?? b.isFinished ?? b.isImportance){
-        if ((a.isFinished && b.isFinished)||(!a.isFinished && !b.isFinished)){
-            return  compareImportance(a,b);
-        }else if (a.isFinished){
-            return 1;
-        }else if (b.isFinished){
-            return -1;
-        }
+    if ((a.isFinished && b.isFinished)||(!a.isFinished && !b.isFinished)){
+        return  compareImportance(a,b);
+    }else if (a.isFinished){
+        return 1;
+    }else if (b.isFinished){
+        return -1;
     }
     return 0;
 }

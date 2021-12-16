@@ -29,6 +29,7 @@ body {
     padding-right: 1em;
     background-color: #224759;
     color: #bbbbbb;
+    box-sizing: border-box;
 }
 
 .input-pane > button{
@@ -112,4 +113,8 @@ body {
 .controlBtn{
     border: 2px solid #ccc;
     border-radius: 1em;
+}
+
+.todo-count{
+    text-align: right;
 }
