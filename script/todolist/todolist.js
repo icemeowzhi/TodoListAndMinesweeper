@@ -150,6 +150,8 @@ function renderInputPane(todoItems) {
 
     let addBtnEl = inputPaneEl.querySelector("#add-btn");
     let hisBtnEl = inputPaneEl.querySelector("#his-btn");
+    let saveBtnEl = inputPaneEl.querySelector("#save-btn")
+    let loadBtnEl = inputPaneEl.querySelector("#load-btn")
 
     addBtnEl.addEventListener("click", (e)=>{
         let inputEl = inputPaneEl.querySelector("input");
@@ -161,6 +163,7 @@ function renderInputPane(todoItems) {
         })
         
         console.log("add a item: ", inputEl.value);
+        inputEl.value = "";
         todoItems.sort(compareTodoItem)
         if (hisBtnEl.classList.contains("open")) {
             hisBtnEl.classList.remove("open");
@@ -177,6 +180,49 @@ function renderInputPane(todoItems) {
             renderFinishedItemList(todoItems)
         }
     });
+
+    saveBtnEl.addEventListener("click",()=>{
+        let date = new Date();
+        let rawData = JSON.stringify(todoItems,null,4);
+        let file = new File([rawData],`Todo-List-${date}.json`);
+        let url = window.URL.createObjectURL(file);
+        let a = document.createElement("a");
+        a.href = url;
+        a.download = `Todo-List-${date}.json`;
+        a.click();
+        window.URL.revokeObjectURL(url);
+    })
+
+    loadBtnEl.addEventListener("click",()=>{
+        let input = document.createElement("input");
+        input.type = "file";
+        input.accept = ".json";
+        input.multiple = false;
+        input.addEventListener("change",(e)=>{
+            let file = input.files[0];
+            file.text().then(
+                result => {
+                    let newObj =  JSON.parse(result);
+                    if (newObj){
+                        let legal = true;
+                        for (let i=0; i < newObj.length; i++ ){
+                            if ((newObj[i].isImportance == null)||( newObj[i].isFinished == null)){
+                                legal = false;
+                            }
+                        }
+                        if (legal){
+                            todoItems = newObj;
+                            renderTodoItemList(todoItems)
+                        }else {
+                            alert("错误：非法的Json格式。")
+                        }
+                    }
+                },
+                error => alert(error)
+            );
+        })
+        input.click();
+    })
 
 }
 
