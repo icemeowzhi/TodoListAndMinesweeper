@@ -63,13 +63,13 @@ function renderTodoItemList(todoItems) {
         });
 
         let deleteBtn = document.createElement("button");
-        deleteBtn.className = "delBtn"
+        deleteBtn.className = "delBtn";
         deleteBtn.innerText = "X";
         deleteBtn.addEventListener("click",()=>{
-            todoItems.splice(i,1)
-            todoItems.sort(compareTodoItem)
-            renderTodoItemList(todoItems)
-        })
+            todoItems.splice(i,1);
+            todoItems.sort(compareTodoItem);
+            renderTodoItemList(todoItems);
+        });
 
         titleEl.innerText = item.title;
 
@@ -82,8 +82,8 @@ function renderTodoItemList(todoItems) {
     }
 
     let todoCount = document.createElement("div")
-    todoCount.className = "todo-count"
-    todoCount.innerText = `共有${todoItems.length}个项目，${finishCount}项已完成，${todoItems.length-finishCount}项未完成。`
+    todoCount.className = "todo-count";
+    todoCount.innerText = `共有${todoItems.length}个项目，${finishCount}项已完成，${todoItems.length-finishCount}项未完成。`;
 
     paneEl.append(todoCount);
 }
@@ -98,7 +98,7 @@ function renderFinishedItemList(todoItems) {
     for (let i=0; i<todoItems.length; i++){
         let item = todoItems[i];
         if (item.isFinished){
-            finishedItems.push(item)
+            finishedItems.push(item);
         }
     }
 
@@ -146,8 +146,8 @@ function renderInputPane(todoItems) {
 
     let addBtnEl = inputPaneEl.querySelector("#add-btn");
     let hisBtnEl = inputPaneEl.querySelector("#his-btn");
-    let saveBtnEl = inputPaneEl.querySelector("#save-btn")
-    let loadBtnEl = inputPaneEl.querySelector("#load-btn")
+    let saveBtnEl = inputPaneEl.querySelector("#save-btn");
+    let loadBtnEl = inputPaneEl.querySelector("#load-btn");
 
     addBtnEl.addEventListener("click", ()=>{
         let inputEl = inputPaneEl.querySelector("input");
@@ -156,7 +156,7 @@ function renderInputPane(todoItems) {
             title: inputEl.value,
             isFinished: false,
             isImportance: false, 
-        })
+        });
         
         console.log("add a item: ", inputEl.value);
         inputEl.value = "";
@@ -170,10 +170,10 @@ function renderInputPane(todoItems) {
     hisBtnEl.addEventListener("click", ()=>{
         if (hisBtnEl.classList.contains("open")) {
             hisBtnEl.classList.remove("open");
-            renderTodoItemList(todoItems)
+            renderTodoItemList(todoItems);
         } else {
             hisBtnEl.classList.add("open");
-            renderFinishedItemList(todoItems)
+            renderFinishedItemList(todoItems);
         }
     });
 
@@ -208,9 +208,9 @@ function renderInputPane(todoItems) {
                         }
                         if (legal){
                             todoItems = newObj;
-                            renderTodoItemList(todoItems)
+                            renderTodoItemList(todoItems);
                         }else {
-                            alert("错误：非法的Json格式。")
+                            alert("错误：非法的Json格式。");
                         }
                     }
                 },
