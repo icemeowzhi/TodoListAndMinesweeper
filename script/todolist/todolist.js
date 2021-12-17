@@ -34,11 +34,11 @@ function renderTodoItemList(todoItems) {
             console.log("click: ", item);
             if (item.isImportance) {
                 item.isImportance = false;
-                todoItems.sort(compareTodoItem)
+                todoItems.sort(compareTodoItem);
 
             } else {
                 item.isImportance = true;
-                todoItems.sort(compareTodoItem)
+                todoItems.sort(compareTodoItem);
             }
 
             renderTodoItemList(todoItems);
@@ -56,8 +56,8 @@ function renderTodoItemList(todoItems) {
             todoItems.splice(i, 1);
             console.log("finished:", i, todoItems, finishedItems );
              */
-            item.isFinished = inputEl.checked
-            todoItems.sort(compareTodoItem)
+            item.isFinished = inputEl.checked;
+            todoItems.sort(compareTodoItem);
             renderTodoItemList(todoItems);
 
         });
@@ -81,7 +81,7 @@ function renderTodoItemList(todoItems) {
         paneEl.append(itemDiv);
     }
 
-    let todoCount = document.createElement("div")
+    let todoCount = document.createElement("div");
     todoCount.className = "todo-count";
     todoCount.innerText = `共有${todoItems.length}个项目，${finishCount}项已完成，${todoItems.length-finishCount}项未完成。`;
 
@@ -111,7 +111,7 @@ function renderFinishedItemList(todoItems) {
         titleEl.className = "title";
 
         let importanceEl = document.createElement("div");
-        importanceEl.className = "important-flag"
+        importanceEl.className = "important-flag";
         importanceEl.innerText = "!";
 
         if (item.isImportance) {
@@ -122,7 +122,7 @@ function renderFinishedItemList(todoItems) {
         importanceEl.addEventListener("click", () => {
             console.log("click: ", item);
             item.isImportance = !item.isImportance;
-            todoItems.sort(compareTodoItem)
+            todoItems.sort(compareTodoItem);
             renderFinishedItemList(todoItems);
         });
 
