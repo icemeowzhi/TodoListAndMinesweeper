@@ -202,7 +202,7 @@ function renderInputPane(todoItems) {
                     if (newObj){
                         let legal = true;
                         for (let i=0; i < newObj.length; i++ ){
-                            if ((newObj[i].isImportance == null)||( newObj[i].isFinished == null)){
+                            if ((newObj[i].title == null)||(newObj[i].isImportance == null)||( newObj[i].isFinished == null)){
                                 legal = false;
                             }
                         }
